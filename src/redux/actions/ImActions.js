@@ -1,8 +1,9 @@
-import {ITEMS,SNEAKERS} from './ImactionTypes'
+import {ITEMS,CARTINS,CARTDEL,CARTITEMS} from './ImactionTypes'
 import {database} from '../../firebase/firebase'
 import 'firebase/firestore'
 import firebase from 'firebase/app'
 const firestore=firebase.firestore()
+//load items for shopping
 export const Items=()=>{
     return dispatch=>{
       
@@ -19,15 +20,26 @@ export const Items=()=>{
 }
 
 //inser into cart
-export const setItem=(note)=>{
-    return dispatch=>{
-        database.push(note)
+export const CartItem=(item)=>{
+    return{
+        type:CARTINS,
+        payload:item
     }
-     }
+}
  
      //deleting the item from cart
-      export const deleteItem=(id)=>{
-         console.log(id)
-         return dispatch=>{database.child(`${id}`).remove()}
+      export const deleteItem=(item)=>{
+         console.log(item)
+         return{
+            type:CARTDEL,
+            payload:item
+        }
  
+     }
+
+     //displaying cart items
+     export const CartDisplay=()=>{
+         return{
+             type:CARTITEMS
+         }
      }

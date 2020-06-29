@@ -1,2 +1,4 @@
 export const ITEMS='ITEMS'
-export const SNEAKERS='SNEAKERS'
+export const CARTINS='CARTINS'
+export const CARTDEL='CARTDEL'
+export const CARTITEMS='CARTITEMS'
