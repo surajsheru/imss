@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { BrowserRouter as Router, Switch,Route,Link,Redirect,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {items as order} from '../redux/reducers/ImReducer'
 import {Items,CartItem,deleteItem} from '../redux/actions/ImActions'
 import Cart from './Cart'
 import Bill from './Bill'
@@ -19,17 +20,27 @@ const callModal=()=>{
     setModalShow(true)
 
 }
-
+const hide=()=>{
+  cit.splice(0);
+  setModalShow(false)
+  
+}
 const[product,setProduct]=useState(items)
 useEffect(()=>{
     
 props.getItems()
 
 },[])
-let cit=Object.values(props.cartitems)
-console.log(props.cartitems)
- //console.log(products)
- let arr=Object.entries(products)
+//console.log()
+ console.log(products)
+ let prod=Object.entries(products)
+ let parr=Object.values(prod[0][1])
+let cit=order.orders;
+//  console.log(cit)
+//  console.log(parr)
+let arr=Object.entries(parr)
+//  let proarr=Object.entries(arr[0].items)
+//  console.log(proarr)
     return (
       
         <div className="container text-center">
@@ -56,7 +67,8 @@ console.log(props.cartitems)
 
         <div className="row">
             <div className='col col-12'>
-                <h1 className="text-primary"> SHOP ITEMS</h1><span>cart items:<b>{cit.length}</b></span>
+                <h1 className="text-primary"> SHOP ITEMS</h1>
+                <span>cart items:<b>{cit.length}</b></span>
                 <button type="button" className="btn btn-primary" onClick={()=>{callModal()}}>GOTO BILL</button>
             </div>
         </div>
@@ -66,8 +78,7 @@ console.log(props.cartitems)
        arr.map(([key,value])=>{
             
             return (
-    
-  
+     
     <div key={key} className="card" style={{width:"16rem"}}>
     <img className="card-img-top" width="100px" height="180px" src={value.imageUrl} alt={value.name}/>
     <div className="card-body">
@@ -85,15 +96,16 @@ console.log(props.cartitems)
  </div>
  
 </div>
-{<Bill  item={cit} show={modalShow} onHide={() => setModalShow(false)}></Bill>}
+{<Bill  item={cit} show={modalShow} onHide={() => hide()}></Bill>}
        </div>
        
     )
+
 }
 const mapStateToProps=(state)=>{
    // console.log(state)
-    return{  products:state.Items,
-             cartitems:state.Cart
+    return{  products:state.Items
+             //cartitems:state.Cart
     }
   }
   const mapActionToProps={
