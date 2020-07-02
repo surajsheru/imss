@@ -1,12 +1,11 @@
 import React,{useEffect,useState} from 'react'
 import { BrowserRouter as Router, Switch,Route,Link,Redirect,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {items as order} from '../redux/reducers/ImReducer'
+import {Nav ,Navbar,NavDropdown} from 'react-bootstrap'
 import {Items,CartItem,deleteItem} from '../redux/actions/ImActions'
-import Cart from './Cart'
 import Bill from './Bill'
 
-function Homepage({products,...props}) {
+function Homepage({products,cartitems,...props}) {
 const items={
     id:"",
     name:"",
@@ -21,65 +20,65 @@ const callModal=()=>{
 
 }
 const hide=()=>{
-  cit.splice(0);
+  cartitems.splice(0);
   setModalShow(false)
   
 }
 const[product,setProduct]=useState(items)
 useEffect(()=>{
-    
+   // console.log(props)
 props.getItems()
 
 },[])
-//console.log()
+
  console.log(products)
- let prod=Object.entries(products)
- let parr=Object.values(prod[0][1])
-let cit=order.orders;
-//  console.log(cit)
-//  console.log(parr)
-let arr=Object.entries(parr)
-//  let proarr=Object.entries(arr[0].items)
-//  console.log(proarr)
-    return (
+ let prod=Object.values(products)
+ //products=Object.entries(products)
+ console.log(prod)
+ let arr=Object.values(prod)
+ console.log(arr.length )
+ console.log(cartitems.length )
+ console.log(cartitems )
+
+ return (
+    <>
+    <Navbar bg="primary" variant="dark">
+    <Navbar.Brand href="#home">IMSS</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="/">Home</Nav.Link>
+      <NavDropdown title="Categories" id="basic-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">HATS</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">SNEKERS</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">WOMEN</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">MEN</NavDropdown.Item>
+        
+      </NavDropdown>
+
+      <Nav.Link ><span>cart items:<b>{cartitems.length}</b></span></Nav.Link>
+      <Nav.Link  onClick={()=>{callModal()}}>YOUR CART</Nav.Link>
+    </Nav>
+    {/* <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+    </Form> */}
+  </Navbar>
       
         <div className="container text-center">
-
-<nav className="navbar  navbar-expand-lg navbar-dark bg-dark ">
-  <a className="navbar-brand" href="/">IMSS</a>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-
-  <div className="collapse navbar-collapse">
-  
-    <ul className="nav justify-content-center ">
-      <li className="nav-item active">
-        <a className="nav-link" href="/"> SHOP<span className="sr-only">(current)</span></a>
-      </li>
-      <li className="nav-item">
-        {/* <Link className="nav-link" to='/cart'>CART</Link> */}
-      </li>
-    </ul>
-    
-  </div>
-</nav>
-
-        <div className="row">
-            <div className='col col-12'>
-                <h1 className="text-primary"> SHOP ITEMS</h1>
-                <span>cart items:<b>{cit.length}</b></span>
-                <button type="button" className="btn btn-primary" onClick={()=>{callModal()}}>GOTO BILL</button>
-            </div>
+      <div className="row">
+            <div className='col col-8'>
+                <h1 className="text-primary text-center"> SHOP ITEMS</h1>
+                {/* <span>cart items:<b>{cartitems.length}</b></span> */}
+              </div>
+              {/* <div className="col col-sm-4">  <button type="button" className="btn btn-primary" onClick={()=>{callModal()}}>GOTO BILL</button>
+            </div> */}
         </div>
-        <div className="container">
-  <div className="row">
-      { 
-       arr.map(([key,value])=>{
+       <div className="row">
+       { 
+       arr.map((value)=>{
             
             return (
      
-    <div key={key} className="card" style={{width:"16rem"}}>
+    <div key={value.id} className="card" style={{width:"16rem"}}>
     <img className="card-img-top" width="100px" height="180px" src={value.imageUrl} alt={value.name}/>
     <div className="card-body">
   <span className="card-title">Product Name:</span><h4>{value.name}</h4>
@@ -94,24 +93,22 @@ let arr=Object.entries(parr)
        })
       }
  </div>
- 
-</div>
-{<Bill  item={cit} show={modalShow} onHide={() => hide()}></Bill>}
-       </div>
-       
-    )
-
+ {<Bill  show={modalShow} onHide={() => hide()}></Bill>}       
+ </div>
+ </>                
+  )
 }
 const mapStateToProps=(state)=>{
-   // console.log(state)
-    return{  products:state.Items
-             //cartitems:state.Cart
-    }
+      return {
+         products:state.Items,
+         cartitems:state.Cart
+      }
+    
   }
   const mapActionToProps={
       getItems:Items,
       CartIns:CartItem,
-      CartDel:deleteItem
+      //CartDel:deleteItem
         }
   export default connect(mapStateToProps,mapActionToProps)(Homepage)
 

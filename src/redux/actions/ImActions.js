@@ -1,14 +1,12 @@
 import {ITEMS,CARTINS,CARTDEL,CARTITEMS} from './ImactionTypes'
 import {database} from '../../firebase/firebase'
-import 'firebase/firestore'
-import firebase from 'firebase/app'
-const firestore=firebase.firestore()
+// import 'firebase/firestore'
+// import firebase from 'firebase/app'
+// const firestore=firebase.firestore()
 //load items for shopping
 export const Items=()=>{
     return dispatch=>{
-      
-        
-            database.on('value',snapshot=>{
+             database.on('value',snapshot=>{
              console.log(snapshot.val())
                 dispatch({
                 type:ITEMS,

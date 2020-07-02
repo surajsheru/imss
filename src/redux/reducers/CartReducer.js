@@ -1,26 +1,18 @@
 import {CARTINS,CARTDEL,CARTITEMS} from '../actions/ImactionTypes'
 
-const cartItems=[]
-export const CartReducer=(state=cartItems,action)=>{
+
+export const CartReducer=(state=[],action)=>{
        console.log(state)
 
        switch (action.type) {
            case CARTDEL:
            
-             return{
-                   ...state,
-                   cartitems:state.cartitems.filter(item=>item.id!==action.payload.id)
-                   
-               }               
+             return state.filter(item=>item.id!==action.payload)
             case CARTINS:
                 console.log(action.payload)
-                cartItems.push(action.payload)
-                return{
-                    ...cartItems                 
-                }   
-           case CARTITEMS:
-                return state
-           default:
+                //cartItems.push(action.payload)
+                return [...state,action.payload]
+            default:
                return state
        }
 } 
