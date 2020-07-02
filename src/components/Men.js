@@ -7,7 +7,7 @@ import {Items,CartItem,deleteItem} from '../redux/actions/ImActions'
 import Bill from './Bill'
 
 
-function Sneakers({products,cartitems,...props}) {
+function Men({products,cartitems,...props}) {
     const items={
         id:"",
         name:"",
@@ -41,10 +41,10 @@ function Sneakers({products,cartitems,...props}) {
      console.log(arr.length )
      console.log(cartitems.length )
      console.log(cartitems )
-    let sneaker=arr.filter(item=>item.cat==='snaeakers')
+    let sneaker=arr.filter(item=>item.cat==='men')
     
     return (
-        
+       
       
         <div className="container text-center">
       <div className="row">
@@ -78,7 +78,7 @@ function Sneakers({products,cartitems,...props}) {
  </div>
  {<Bill  show={modalShow} onHide={() => hide()}></Bill>}       
  </div>
- 
+
     )
 }
  
@@ -94,6 +94,6 @@ const mapStateToProps=(state)=>{
       CartIns:CartItem,
       //CartDel:deleteItem
         }
-  export default connect(mapStateToProps,mapActionToProps)(Sneakers)
+  export default connect(mapStateToProps,mapActionToProps)(Men)
 
 

@@ -42,26 +42,7 @@ props.getItems()
 
  return (
     <>
-    <Navbar bg="primary" variant="dark">
-    <Navbar.Brand href="#home">IMSS</Navbar.Brand>
-    <Nav className="mr-auto">
-      <Nav.Link href="/">Home</Nav.Link>
-      <NavDropdown title="Categories" id="basic-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">HATS</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">SNEKERS</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">WOMEN</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">MEN</NavDropdown.Item>
-        
-      </NavDropdown>
-
-      <Nav.Link ><span>cart items:<b>{cartitems.length}</b></span></Nav.Link>
-      <Nav.Link  onClick={()=>{callModal()}}>YOUR CART</Nav.Link>
-    </Nav>
-    {/* <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
-    </Form> */}
-  </Navbar>
+    
       
         <div className="container text-center">
       <div className="row">

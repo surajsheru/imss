@@ -1,13 +1,12 @@
 
 import React,{useEffect,useState} from 'react'
-import { BrowserRouter as Router, Switch,Route,Link,Redirect,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {Nav ,Navbar,NavDropdown} from 'react-bootstrap'
+import { BrowserRouter as Router, Switch,Route,Link,Redirect,withRouter} from 'react-router-dom'
 import {Items,CartItem,deleteItem} from '../redux/actions/ImActions'
 import Bill from './Bill'
 
 
-function Sneakers({products,cartitems,...props}) {
+function Women({products,cartitems,...props}) {
     const items={
         id:"",
         name:"",
@@ -41,11 +40,11 @@ function Sneakers({products,cartitems,...props}) {
      console.log(arr.length )
      console.log(cartitems.length )
      console.log(cartitems )
-    let sneaker=arr.filter(item=>item.cat==='snaeakers')
+    let sneaker=arr.filter(item=>item.cat==='Women')
     
     return (
-        
-      
+        <>
+          
         <div className="container text-center">
       <div className="row">
             <div className='col col-8'>
@@ -78,7 +77,7 @@ function Sneakers({products,cartitems,...props}) {
  </div>
  {<Bill  show={modalShow} onHide={() => hide()}></Bill>}       
  </div>
- 
+ </>
     )
 }
  
@@ -94,6 +93,6 @@ const mapStateToProps=(state)=>{
       CartIns:CartItem,
       //CartDel:deleteItem
         }
-  export default connect(mapStateToProps,mapActionToProps)(Sneakers)
+  export default connect(mapStateToProps,mapActionToProps)(Women)
 
 

@@ -9,6 +9,10 @@ function Bill({cartitems,...props}) {
     //  let arr=Object.values(props.item)
      console.log(cartitems)
      console.log(props)
+
+     const disp=()=>{
+       alert("clicked")
+     }
     return (
       
         <Modal
@@ -44,7 +48,7 @@ function Bill({cartitems,...props}) {
         <td scope="row"><img src={x.imageUrl} alt={x.name}></img></td>
             <td>{x.name}</td>
             <td>1</td>
-            <td><button tyep="button" onClick={()=>{props.cartdel(x.id)}}>DELETE</button></td>
+            <td><button className="btn btn-danger" tyep="button" onClick={()=>{disp()}}>DELETE</button></td>
             {console.log(sum=sum+parseInt (x.price))}
         </tr>)
        

@@ -10,7 +10,7 @@ export const CartReducer=(state=[],action)=>{
              return state.filter(item=>item.id!==action.payload)
             case CARTINS:
                 console.log(action.payload)
-                //cartItems.push(action.payload)
+                 //cartItems.push(action.payload)
                 return [...state,action.payload]
             default:
                return state
